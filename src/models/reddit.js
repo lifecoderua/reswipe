@@ -22,6 +22,8 @@ const Reddit = {
         // TODO: is it available?
         src: decodeEntities(entry.data.preview.images[0].source.url),
         type: 'image',
+        author: entry.data.author,
+        link: entry.data.url,
       })),
       after: result.after,
     };
