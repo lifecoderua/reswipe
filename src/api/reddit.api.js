@@ -2,7 +2,7 @@ const RedditApi = {
   /**
    * Request selected Reddit communities
    *
-   * https://www.reddit.com/r/Art+listentothis/.json[?after=xxx]
+   * https://www.reddit.com/r/Art+listentothis/.json[?after=xxx][?limit=100]
    * @param communities array of requested communities
    * @param after string After pagination key
    * @returns {array, string} posts from the selected communities and next pagination id
