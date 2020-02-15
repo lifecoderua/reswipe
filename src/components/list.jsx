@@ -60,6 +60,17 @@ class List extends React.Component {
           {items.map(item => (
             <li key={item.src} className="swiper-slide">
               <img src={item.src} className="media" alt=""/>
+              <div className="metadata">
+                <p>
+                  by {item.author} at {item.community}
+                </p>
+                <p>
+                  <a href={item.link} target="_blank">
+                    <i className="material-icons">cloud_download</i>
+                    original
+                  </a>
+                </p>
+              </div>
             </li>
           ))}
         </Swiper>
