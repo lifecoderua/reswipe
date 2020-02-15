@@ -5,8 +5,9 @@ import Entry from './components/entry';
 import Reddit from './models/reddit';
 
 function App() {
-  const entries = Reddit.getFeed(['art']);
-  console.log(entries);
+  const entries = Reddit.getFeed(['art'])
+    .then(entries => console.log(entries));
+
 
   return (
     <div className="App">
