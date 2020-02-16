@@ -4,11 +4,9 @@ import List from './components/list';
 
 // TODO: dimensions display
 // TODO: select optimal dimensions from the preview list
-// TODO: video control
 // TODO: autoplay mode
 // TODO: select communities to browse; pre-defined list; store preferences (localStorage)
 // TODO: preload next batch of slides
-// TODO: catch keyboard control on load
 // TODO: lazy load images
 // TODO: detailed info on tap
 // TODO: react on the android address bar height (as it could hide and show):

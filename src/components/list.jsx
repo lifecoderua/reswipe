@@ -4,7 +4,7 @@ import 'swiper/css/swiper.css';
 import React from 'react';
 import Reddit from '../models/reddit';
 import Swiper from 'react-id-swiper';
-
+import Preferences from './preferences';
 
 class List extends React.Component {
   constructor(props) {
@@ -18,6 +18,13 @@ class List extends React.Component {
 
   componentDidMount() {
     this.fetchData();
+    this.setFocusOnSwiper();
+  }
+
+  setFocusOnSwiper() {
+    if (this.swiperRef) {
+      this.swiperRef.focus();
+    }
   }
 
   async fetchData() {
@@ -65,9 +72,15 @@ class List extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <Swiper {...swiperParams}>
+        <Swiper
+          {...swiperParams}>
+          <div
+            ref={(elem) => { this.swiperRef = elem; }}
+            className="swiper-slide">
+            <Preferences/>
+          </div>
           {items.map(item => (
-            <li key={item.src} className="swiper-slide">
+            <div key={item.src} className="swiper-slide">
               {itemView(item)}
               <div className="metadata">
                 <p>
@@ -80,7 +93,7 @@ class List extends React.Component {
                   </a>
                 </p>
               </div>
-            </li>
+            </div>
           ))}
         </Swiper>
       );
