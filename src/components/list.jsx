@@ -41,7 +41,6 @@ class List extends React.Component {
         items: result.items
       });
     }
-    console.log(result);
   }
 
   render() {
@@ -87,7 +86,7 @@ class List extends React.Component {
                   by {item.author} @ {item.community}
                 </p>
                 <p>
-                  <a href={item.post} target="_blank">
+                  <a href={item.post} target="_blank" rel="noopener noreferrer">
                     <i className="material-icons">link</i>
                     original
                   </a>
