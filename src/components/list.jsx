@@ -22,6 +22,7 @@ class List extends React.Component {
 
   async fetchData() {
     const result = await Reddit.getFeed(['art']);
+    // const result = await Reddit.getFeed(['ListenToThis']);
     if (result === false) {
       this.setState({
         isLoaded: true,
@@ -49,6 +50,14 @@ class List extends React.Component {
       grabCursor: true,
     };
 
+    function itemView(item) {
+      if (item.embed) {
+        return <div className="media" dangerouslySetInnerHTML={{__html: item.embed}}/>;
+      } else {
+        return <img src={item.src} className="media" alt=""/>;
+      }
+    }
+
     const { error, isLoaded, items } = this.state;
     if (error) {
       return <div>Failed to load the data.</div>;
@@ -59,14 +68,14 @@ class List extends React.Component {
         <Swiper {...swiperParams}>
           {items.map(item => (
             <li key={item.src} className="swiper-slide">
-              <img src={item.src} className="media" alt=""/>
+              {itemView(item)}
               <div className="metadata">
                 <p>
-                  by {item.author} at {item.community}
+                  by {item.author} @ {item.community}
                 </p>
                 <p>
-                  <a href={item.link} target="_blank">
-                    <i className="material-icons">cloud_download</i>
+                  <a href={item.post} target="_blank">
+                    <i className="material-icons">link</i>
                     original
                   </a>
                 </p>

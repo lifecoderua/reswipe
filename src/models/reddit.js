@@ -18,7 +18,9 @@ const Reddit = {
     const result = await RedditApi.getCommunityPosts(communities);
 
     return {
-      items: result.items.map((entry) => ({
+      items: result.items
+        .filter(Reddit.isMediaEntry)
+        .map((entry) => ({
         // TODO: is it available?
         // TODO: it may be gif animation; previews are static;
         src: decodeEntities(entry.data.preview.images[0].source.url),
@@ -27,11 +29,28 @@ const Reddit = {
         title: entry.data.title,
         author: entry.data.author,
         link: entry.data.url,
-        post: entry.data.permalink,
+        post: `https://reddit.com${entry.data.permalink}`,
+        embed: decodeEntities(Reddit.getMediaEmbed(entry)),
       })),
       after: result.after,
     };
   },
+
+  getMediaEmbed(entry) {
+    try {
+      return entry.data.secure_media_embed.content
+        || entry.data.crosspost_parent_list[0].secure_media_embed.content;
+    } catch {
+      return null;
+    }
+
+  },
+
+  isMediaEntry(entry) {
+    return entry.data.selftext === '';
+  }
+
+
 };
 
 export default Reddit;
