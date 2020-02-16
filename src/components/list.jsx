@@ -28,7 +28,7 @@ class List extends React.Component {
   }
 
   async fetchData() {
-    const result = await Reddit.getFeed(['art']);
+    const result = await Reddit.getFeed(['Art', 'EarthPorn']);
     // const result = await Reddit.getFeed(['ListenToThis']);
     if (result === false) {
       this.setState({
