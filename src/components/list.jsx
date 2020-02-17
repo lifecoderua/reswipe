@@ -10,15 +10,25 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      communities: {
+        'Art': true,
+        'EarthPorn': true,
+        'MildlyInteresting': false,
+      },
       error: null,
       isLoaded: false,
       items: []
     };
   }
 
+  onCommunitiesChange(communities) {
+    this.setState({communities})
+  }
+
   componentDidMount() {
     this.fetchData();
     this.setFocusOnSwiper();
+    this.onCommunitiesChange = this.onCommunitiesChange.bind(this);
   }
 
   setFocusOnSwiper() {
@@ -76,7 +86,10 @@ class List extends React.Component {
           <div
             ref={(elem) => { this.swiperRef = elem; }}
             className="swiper-slide">
-            <Preferences/>
+            <Preferences
+              communities={this.state.communities}
+              onCommunitiesChange={this.onCommunitiesChange}
+              />
           </div>
           {items.map(item => (
             <div key={item.src} className="swiper-slide">
